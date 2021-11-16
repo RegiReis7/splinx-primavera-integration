@@ -50,7 +50,7 @@ export async function createDocument(document: Primavera) {
       }
     );
   } catch (e) {
-    throw e;
+    log.error(e);
   }
 }
 
@@ -71,6 +71,6 @@ export async function createCustomer(customer: PrimaveraCustomer) {
       }
     );
   } catch (e) {
-    throw e;
+    log.error(e);
   }
 }
