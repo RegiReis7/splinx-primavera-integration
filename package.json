@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "http-build-query": "^0.7.0",
     "pino": "^7.2.0",
+    "smee-client": "^1.2.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   },

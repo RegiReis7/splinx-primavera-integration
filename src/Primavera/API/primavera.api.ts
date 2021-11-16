@@ -14,7 +14,7 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
   const data = {
     username: process.env.USERNAME_PRIMAVERA,
     password: process.env.PASSWORD_PRIMAVERA,
-    company: process.env.COMPANY_PRIMAVERA,
+    //company: process.env.COMPANY_PRIMAVERA,
     instance: "Default",
     grant_type: "password",
     line : "executive"
