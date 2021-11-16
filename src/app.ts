@@ -15,6 +15,7 @@ const specs = swaggerJsDoc(swaggerOptions);
 
 const app = express();
 
+app.use(express.json());
 app.use("/invoices", invoicesRoute);
 app.use("/customers", customerRoute);
 app.use("/api", healthRoute);

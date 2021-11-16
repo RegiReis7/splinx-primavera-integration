@@ -58,6 +58,23 @@ export async function getInvoices() {
   }
 }
 
+//GET invoice by a given id
+
+export async function getInvoiceById(id: number) {
+  try {
+    return (await axios.get(
+      `${process.env.API_URL}/api/2.0/admin/finance/invoices/${id}`,
+      {
+        headers: {
+          Authorization: `Splynx-EA (${getAuthString()})`,
+        },
+      }
+    )) as InvoiceSplinx;
+  } catch (e) {
+    log.error(e);
+  }
+}
+
 //Calls the GET method for a customer by a given id
 
 export async function getCustomerById(id: number) {
