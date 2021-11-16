@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import dotenv from "dotenv";
 import log from "../../Log";
 import Primavera, {
