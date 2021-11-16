@@ -1,4 +1,3 @@
-import log from "./Log";
 import express from "express";
 import invoicesRoute from "./Routes/invoices.routes";
 import customerRoute from "./Routes/customers.routes";
@@ -25,6 +24,4 @@ app.use("/api", healthRoute);
 app.use("/api", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/webhook", webHookRoute);
 
-app.listen(process.env.SERVER_PORT, () => {
-  log.info(`O aplicativo está executando na porta ${process.env.SERVER_PORT}`);
-});
+app.listen(process.env.SERVER_PORT || 3000);
