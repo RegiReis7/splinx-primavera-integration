@@ -24,4 +24,4 @@ app.use("/api", healthRoute);
 app.use("/api", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/webhook", webHookRoute);
 
-app.listen(process.env.SERVER_PORT || 3000);
+app.listen(process.env.SERVER_PORT || 5000);
