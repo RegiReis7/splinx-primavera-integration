@@ -17,6 +17,7 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
     company: process.env.COMPANY_PRIMAVERA,
     instance: "Default",
     grant_type: "password",
+    line : "executive"
   };
 
   let token: PrimaveraToken;

@@ -54,7 +54,7 @@ export async function getInvoices() {
       }
     )) as InvoiceSplinx[];
   } catch (e) {
-    log.error(e);
+    throw e;
   }
 }
 
@@ -71,7 +71,7 @@ export async function getInvoiceById(id: number) {
       }
     )) as InvoiceSplinx;
   } catch (e) {
-    log.error(e);
+    throw e;
   }
 }
 
@@ -88,7 +88,7 @@ export async function getCustomerById(id: number) {
       }
     )) as SplynxCustomer;
   } catch (e) {
-    log.error(e);
+    throw e;
   }
 }
 
@@ -105,6 +105,6 @@ export async function getSplynxCustomers() {
       }
     )) as SplynxCustomer[];
   } catch (e) {
-    log.error(e);
+    throw e;
   }
 }

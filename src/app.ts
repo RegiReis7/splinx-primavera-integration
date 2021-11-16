@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerOptions from "./Helper/swagger.options.json";
+import cors from "cors";
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ const specs = swaggerJsDoc(swaggerOptions);
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+
 app.use("/invoices", invoicesRoute);
 app.use("/customers", customerRoute);
 app.use("/api", healthRoute);
