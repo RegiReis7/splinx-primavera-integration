@@ -7,7 +7,7 @@ import SplynxWebhook from "../Splynx/Model/webhook.models";
 
 export const paymentListener = async (req: Request, res: Response) => {
   const webHookBody = req.body as SplynxWebhook;
-  const invoince = await getInvoiceById(webHookBody.data.attributes.invoice_id);
+  /*const invoince = await getInvoiceById(webHookBody.data.attributes.invoice_id);
   const customer = await getCustomerById(webHookBody.data.customer_id);
 
   let document: Primavera;
@@ -21,5 +21,8 @@ export const paymentListener = async (req: Request, res: Response) => {
     await createDocument(document);
   } catch (e) {
     log.err(e);
-  }
+  }*/
+
+  log.info(webHookBody);
+  res.status(200).json({ message: "Received" });
 };
