@@ -1,0 +1,63 @@
+{
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Splinx-Primavera",
+      "version": "1.0.0",
+      "description": "API that integrates Splynx and Primavera",
+      "contact": {
+        "email": "regi@fisastrategy.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000"
+      }
+    ],
+    "paths": {
+      "/customers/export": {
+        "get": {
+          "summary": "Export Customers",
+          "tags": ["Customers"],
+          "responses": {
+            "200": {
+              "description": "Exportation went well"
+            },
+            "400": {
+              "description": "Something went wrong on the exportation process"
+            }
+          }
+        }
+      },
+      "/invoices/export": {
+        "get": {
+          "summary": "Export Invoices and creates primavera documents",
+          "tags": ["Invoices"],
+          "responses": {
+            "200": {
+              "description": "Exportation went well"
+            },
+            "400": {
+              "description": "Something went wrong on the exportation process"
+            }
+          }
+        }
+      },
+      "/api/health": {
+        "get": {
+          "summary": "Checks if the api is working fine",
+          "tags": ["API"],
+          "responses": {
+            "200": {
+              "description": "API is alive"
+            },
+            "400": {
+              "description": "API is not responding"
+            }
+          }
+        }
+      }
+    }
+  },
+  "apis": ["../dist/Routes/*.js"]
+}

@@ -5,7 +5,6 @@ import { createCustomer } from "../Primavera/API/primavera.api";
 import log from "../Log";
 
 export const exportCustomer = async (req: Request, res: Response) => {
-  
   log.info("Getting the list of splynx customers...");
   const customers = await getSplynxCustomers();
 

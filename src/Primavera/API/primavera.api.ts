@@ -21,8 +21,8 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
 
   let token: PrimaveraToken;
 
-  log.info("Requesting an acces token from primavera webAPI");
   try {
+    log.info("Requesting an acces token from primavera webAPI");
     token = await axios.post(`${process.env.API_URL_PRIMAVERA}token`, {
       data,
     });
@@ -37,8 +37,8 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
 export async function createDocument(document: Primavera) {
   const token = await getToken();
 
-  log.info("Calling a post method to create a primavera document");
   try {
+    log.info("Calling a post method to create a primavera document");
     await axios.post(
       `${process.env.API_URL_PRIMAVERA}Vendas/Docs/CreateDocument/`,
       {
@@ -49,7 +49,7 @@ export async function createDocument(document: Primavera) {
       }
     );
   } catch (e) {
-    return e;
+    throw e;
   }
 }
 
@@ -58,8 +58,8 @@ export async function createDocument(document: Primavera) {
 export async function createCustomer(customer: PrimaveraCustomer) {
   const token = await getToken();
 
-  log.info("Calling a post method to create a primavera customer");
   try {
+    log.info("Calling a post method to create a primavera customer");
     await axios.post(
       `${process.env.API_URL_PRIMAVERA}Base/Clientes/Actualiza`,
       {
@@ -70,6 +70,6 @@ export async function createCustomer(customer: PrimaveraCustomer) {
       }
     );
   } catch (e) {
-    return e;
+    throw e;
   }
 }
