@@ -23,7 +23,9 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
   let token: PrimaveraToken;
 
   try {
-    log.info("Requisitando um token de acesso da WebAPI do Primavera");
+    log.info(
+      "(API PRIMAVERA) Requisitando um token de acesso da WebAPI do Primavera"
+    );
     token = await axios.post(`${process.env.API_URL_PRIMAVERA}token`, {
       data,
     });
@@ -40,8 +42,10 @@ export async function createDocument(document: Primavera) {
   const token = await getToken();
 
   try {
-    log.info("Chamando o método POST para a criação de um documento (factura)");
-    await axios.post(
+    log.info(
+      "(API PRIMAVERA) Chamando o método POST para a criação de um documento (factura)"
+    );
+    return await axios.post(
       `${process.env.API_URL_PRIMAVERA}Vendas/Docs/CreateDocument/`,
       {
         headers: {
@@ -51,7 +55,7 @@ export async function createDocument(document: Primavera) {
       }
     );
   } catch (e) {
-    log.error(`Erro na criação do documento (factura): ${e}`);
+    log.error(`(API PRIMAVERA) Erro na criação do documento (factura): ${e}`);
   }
 }
 
@@ -62,9 +66,9 @@ export async function createCustomer(customer: PrimaveraCustomer) {
 
   try {
     log.info(
-      "Chamando o método POST para a criação de um cliente no primavera"
+      "(API PRIMAVERA) Chamando o método POST para a criação de um cliente no primavera"
     );
-    await axios.post(
+    return await axios.post(
       `${process.env.API_URL_PRIMAVERA}Base/Clientes/Actualiza`,
       {
         headers: {
@@ -74,6 +78,6 @@ export async function createCustomer(customer: PrimaveraCustomer) {
       }
     );
   } catch (e) {
-    log.error(`Erro na criação do cliente no primavera: ${e}`);
+    log.error(`(API PRIMAVERA) Erro na criação do cliente no primavera: ${e}`);
   }
 }

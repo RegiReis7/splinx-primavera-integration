@@ -1,4 +1,5 @@
 export default interface SplynxCustomer {
+  id: number;
   login: string;
   status: string;
   partner_id: number;
@@ -22,4 +23,7 @@ export default interface SplynxCustomer {
   last_online: string;
   last_update: string;
   daily_prepaid_cost: number;
+  additional_attributes: {
+    numero_de_identificacao_fiscal: string;
+  };
 }

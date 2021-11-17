@@ -56,6 +56,27 @@
             }
           }
         }
+      },
+      "/customers/{id}": {
+        "get": {
+          "summary": "Get Customers",
+          "tags": ["Customers"],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": "true"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Customer received"
+            },
+            "400": {
+              "description": "Something went wrong getting the customer"
+            }
+          }
+        }
       }
     }
   },

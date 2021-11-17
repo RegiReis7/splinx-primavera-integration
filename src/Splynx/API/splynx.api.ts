@@ -20,7 +20,7 @@ const token = Buffer.from(
 //Autenticação de acesso à API do Splynx por assinatura
 
 function signature() {
-  log.info("Criando a chave de assinatura...");
+  log.info("(API) Criando a chave de assinatura...");
   var signature = nonce_v + process.env.API_KEY!!;
 
   return crypto
@@ -45,17 +45,19 @@ function getAuthString() {
 
 export async function getInvoices(): Promise<InvoiceSplinx[] | undefined> {
   try {
-    log.info("Retornando a lista de invoices...");
-    return await axios.get(
+    const response = await axios.get(
       `${process.env.API_URL}/api/2.0/admin/finance/invoices`,
       {
         headers: {
-          Authorization: `Splynx-EA (${getAuthString()})`,
+          Authorization: `Basic ${token}`,
         },
       }
     );
+    log.info("(API) Retornando a lista de invoices...");
+    return await response.data;
   } catch (e) {
-    log.error(`Falha ao requisitar a lista de invoices: ${e}`);
+    log.error(`(API) Falha ao requisitar a lista de invoices: ${e}`);
+    return undefined;
   }
 }
 
@@ -65,17 +67,19 @@ export async function getInvoiceById(
   id: number
 ): Promise<InvoiceSplinx | undefined> {
   try {
-    log.info(`Retornando o invoice ${id}...`);
-    return await axios.get(
+    const response = await axios.get(
       `${process.env.API_URL}/api/2.0/admin/finance/invoices/${id}`,
       {
         headers: {
-          Authorization: `Splynx-EA (${getAuthString()})`,
+          Authorization: `Basic ${token}`,
         },
       }
     );
+    log.info(`(API) Retornando o invoice ${id}...`);
+    return await response.data;
   } catch (e) {
-    log.error(`Falha ao requisitar o invoice ${id} : ${e}`);
+    log.error(`(API) Falha ao requisitar o invoice ${id} : ${e}`);
+    return undefined;
   }
 }
 
@@ -85,17 +89,19 @@ export async function getCustomerById(
   id: number
 ): Promise<SplynxCustomer | undefined> {
   try {
-    log.info(`Retornando o cliente ${id}...`);
-    return await axios.get(
+    const response = await axios.get(
       `${process.env.API_URL}/api/2.0/admin/customers/customer/${id}`,
       {
         headers: {
-          Authorization: `Splynx-EA (${getAuthString()})`,
+          Authorization: `Basic ${token}`,
         },
       }
     );
+    log.info(`(API) Retornando o cliente ${id}...`);
+    return await response.data;
   } catch (e) {
-    log.error(`Falha ao requisitar o cliente ${id} : ${e}`);
+    log.error(`(API) Falha ao requisitar o cliente ${id} : ${e}`);
+    return undefined;
   }
 }
 
@@ -105,16 +111,18 @@ export async function getSplynxCustomers(): Promise<
   SplynxCustomer[] | undefined
 > {
   try {
-    log.info(`Retornando a lista de clientes...`);
-    return await axios.get(
+    const response = await axios.get(
       `${process.env.API_URL}/api/2.0/admin/customers/customer`,
       {
         headers: {
-          Authorization: `Splynx-EA (${getAuthString()})`,
+          Authorization: `Basic ${token}`,
         },
       }
     );
+    log.info(`(API) Retornando a lista de clientes...`);
+    return await response.data;
   } catch (e) {
-    log.error(`Falha ao requisitar a lista de clientes : ${e}`);
+    log.error(`(API) Falha ao requisitar a lista de clientes : ${e}`);
+    return undefined;
   }
 }
