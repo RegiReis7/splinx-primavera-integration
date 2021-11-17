@@ -1,7 +1,7 @@
 
 # INTEGRAÇÃO SPLINX E PRIMAVERA
 
-Aplicação que garante a comunicação entre as plataformas **Splynx** e **Primavera** para fins de faturação em detrimento de um evento de pagamento
+Aplicação que garante a comunicação entre as plataformas **Splynx** e **Primavera** para fins de faturação quando um evento de pagamento é acionado
 
 
 ## AMBIENTE
