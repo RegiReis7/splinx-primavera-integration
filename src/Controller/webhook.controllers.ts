@@ -6,23 +6,33 @@ import { getCustomerById, getInvoiceById } from "../Splynx/API/splynx.api";
 import SplynxWebhook from "../Splynx/Model/webhook.models";
 
 export const paymentListener = async (req: Request, res: Response) => {
-  const webHookBody = req.body as SplynxWebhook;
-  /*const invoince = await getInvoiceById(webHookBody.data.attributes.invoice_id);
-  const customer = await getCustomerById(webHookBody.data.customer_id);
+  if (req.body) {
+    const webHookBody = req.body as SplynxWebhook;
+    log.info(`Informação do webhook recebida: ${JSON.stringify(webHookBody)}`);
+    res.status(200).json({ mensagem: "Informação do webhook recebida" });
 
-  let document: Primavera;
-  invoince.items.forEach((e) => {
-    document.Linhas.push({ Artigo: e.description, Quantidade: e.quantity });
-  });
-  document.Entidade = customer.name;
-  document.DataDoc = webHookBody.data.attributes.date;
-
-  try {
-    await createDocument(document);
-  } catch (e) {
-    log.err(e);
-  }*/
-
-  log.info(webHookBody);
-  res.status(200).json({ message: "Received" });
+    /*try {
+      const invoince = await getInvoiceById(
+        webHookBody.data.attributes.invoice_id
+      );
+      const customer = await getCustomerById(webHookBody.data.customer_id);
+  
+      let document: Primavera;
+      invoince.items.forEach((e) => {
+        document.Linhas.push({ Artigo: e.description, Quantidade: e.quantity });
+      });
+      document.Entidade = customer.name;
+      document.DataDoc = webHookBody.data.attributes.date;
+  
+      await createDocument(document);
+      log.info("Documento criado");
+    } catch (e) {
+      log.err(`Erro ao criar o documento: ${e}`);
+    }*/
+  } else {
+    log.error(`Informação do webhook não recebida...`);
+    res
+      .status(400)
+      .json({ mensagem: "Informação do webhook não foi recebida" });
+  }
 };

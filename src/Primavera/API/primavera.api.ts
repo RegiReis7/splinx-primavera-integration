@@ -8,7 +8,7 @@ import Primavera, {
 
 dotenv.config();
 
-//Requests an access token
+//Requisição de um token de acesso à API do Primavera
 
 async function getToken(): Promise<PrimaveraToken | undefined> {
   const data = {
@@ -17,29 +17,30 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
     //company: process.env.COMPANY_PRIMAVERA,
     instance: "Default",
     grant_type: "password",
-    line : "executive"
+    line: "executive",
   };
 
   let token: PrimaveraToken;
 
   try {
-    log.info("Requesting an acces token from primavera webAPI");
+    log.info("Requisitando um token de acesso da WebAPI do Primavera");
     token = await axios.post(`${process.env.API_URL_PRIMAVERA}token`, {
       data,
     });
     return token;
   } catch (e) {
+    log.error(`Falha ao requisitar o token de acesso (Primavera) : ${e}`);
     return undefined;
   }
 }
 
-//Calls POST method to create a document
+//Chamada do método POST para a criação de um documento (factura)
 
 export async function createDocument(document: Primavera) {
   const token = await getToken();
 
   try {
-    log.info("Calling a post method to create a primavera document");
+    log.info("Chamando o método POST para a criação de um documento (factura)");
     await axios.post(
       `${process.env.API_URL_PRIMAVERA}Vendas/Docs/CreateDocument/`,
       {
@@ -50,17 +51,19 @@ export async function createDocument(document: Primavera) {
       }
     );
   } catch (e) {
-    log.error(e);
+    log.error(`Erro na criação do documento (factura): ${e}`);
   }
 }
 
-//Calls POST method to create a customer
+//Chamada do método POST para a criação de um cliente no Primavera
 
 export async function createCustomer(customer: PrimaveraCustomer) {
   const token = await getToken();
 
   try {
-    log.info("Calling a post method to create a primavera customer");
+    log.info(
+      "Chamando o método POST para a criação de um cliente no primavera"
+    );
     await axios.post(
       `${process.env.API_URL_PRIMAVERA}Base/Clientes/Actualiza`,
       {
@@ -71,6 +74,6 @@ export async function createCustomer(customer: PrimaveraCustomer) {
       }
     );
   } catch (e) {
-    log.error(e);
+    log.error(`Erro na criação do cliente no primavera: ${e}`);
   }
 }

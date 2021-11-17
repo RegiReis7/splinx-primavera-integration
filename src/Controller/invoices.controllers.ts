@@ -20,7 +20,7 @@ export const exportInvoice = async (req: Request, res: Response) => {
       document.DataDoc = e.date_created;
       createDocument(document)
         .then((result) => {
-          res.status(200).json({
+          res.status(201).json({
             message: `A document for invoice ${e.id} was created`,
           });
         })
