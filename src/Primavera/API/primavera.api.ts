@@ -14,7 +14,7 @@ async function getToken(): Promise<PrimaveraToken | undefined> {
   const data = {
     username: process.env.USERNAME_PRIMAVERA,
     password: process.env.PASSWORD_PRIMAVERA,
-    //company: process.env.COMPANY_PRIMAVERA,
+    company: process.env.COMPANY_PRIMAVERA,
     instance: "Default",
     grant_type: "password",
     line: "executive",
@@ -79,5 +79,29 @@ export async function createCustomer(customer: PrimaveraCustomer) {
     );
   } catch (e) {
     log.error(`(API PRIMAVERA) Erro na criação do cliente no primavera: ${e}`);
+  }
+}
+
+//Chamada ao método para verificar a existência de um cliente dado o seu id
+
+export async function customerExists(
+  id: number
+): Promise<PrimaveraCustomer | undefined> {
+  const token = await getToken();
+
+  try {
+    const response = await axios.get(
+      `${process.env.API_URL_PRIMAVERA}Base/Clientes/Existe/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token?.access_token}`,
+        },
+      }
+    );
+    log.info(`(API PRIMAVERA) Retornando o cliente ${id}`);
+    return await response.data;
+  } catch (e) {
+    log.error(`(API PRIMAVERA) Erro ao verificar se o cliente existe: ${e}`);
+    return undefined;
   }
 }

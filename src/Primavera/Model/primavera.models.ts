@@ -1,11 +1,14 @@
 export default interface Primavera {
   Linhas: {
     Artigo: string;
+    IVA: number;
+    Descricao: string;
     Quantidade: number;
+    Valor: string;
   }[];
   Tipodoc: "FA";
   Serie: "C";
-  Entidade: string;
+  Entidade: number;
   TipoEntidade: "C";
   DataDoc: string;
   DataVenc: string;
@@ -18,7 +21,7 @@ export interface PrimaveraToken {
 }
 
 export interface PrimaveraCustomer {
-  Cliente: string;
+  Cliente: number;
   Nome: string;
   Descricao?: string;
   Morada: string;

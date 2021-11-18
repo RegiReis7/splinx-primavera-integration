@@ -8,16 +8,17 @@ export const exportCustomer = async (req: Request, res: Response) => {
   log.info("Recebendo a lista de clientes...");
   const customers = await getSplynxCustomers();
 
-  if(customers){
+  if (customers) {
     customers.forEach((e) => {
       let primaveraCustomer: PrimaveraCustomer = {
-        Cliente: e.login,
+        Cliente: e.id,
         Nome: e.name,
         Morada: e.street_1,
         Localidade: e.city,
         CodigoPostal: e.zip_code,
         Telefone: e.phone,
         EnderecoWeb: e.email,
+        NumContribuinte: e.additional_attributes.numero_de_identificacao_fiscal,
       };
       createCustomer(primaveraCustomer)
         .then((result) => {
@@ -29,9 +30,11 @@ export const exportCustomer = async (req: Request, res: Response) => {
           });
         });
     });
-  }else{
+  } else {
     log.error(`Erro ao requisitar a lista de clientes!`);
-    res.status(400).json({ mensagem: "Erro ao requisitar a lista de clientes" });
+    res
+      .status(400)
+      .json({ mensagem: "Erro ao requisitar a lista de clientes" });
   }
 };
 
