@@ -8,7 +8,11 @@ import {
 import Primavera, {
   PrimaveraCustomer,
 } from "../Primavera/Model/primavera.models";
-import { getCustomerById, getInvoiceById } from "../Splynx/API/splynx.api";
+import {
+  getCustomerById,
+  getCustomerStatistics,
+  getInvoiceById,
+} from "../Splynx/API/splynx.api";
 import SplynxWebhook from "../Splynx/Model/webhook.models";
 
 export const paymentListener = async (req: Request, res: Response) => {
@@ -23,6 +27,8 @@ export const paymentListener = async (req: Request, res: Response) => {
       );
       const customer = await getCustomerById(webHookBody.data.customer_id);
 
+      const tariff = await getCustomerStatistics(webHookBody.data.customer_id);
+
       const customerPrimavera = await customerExists(
         webHookBody.data.customer_id
       );
@@ -31,11 +37,11 @@ export const paymentListener = async (req: Request, res: Response) => {
         let document: Primavera;
         invoince.items.forEach((e) => {
           document.Linhas.push({
-            Artigo: e.description,
+            Artigo: tariff.tariff_id,
             Quantidade: e.quantity,
-            IVA: e.tax,
-            Descricao: e.description,
-            Valor: webHookBody.data.attributes.amount,
+            //IVA: e.tax,
+            //Descricao: e.description,
+            //Total_Liquido: webHookBody.data.attributes.amount,
           });
         });
         document.Entidade = customer.id;
@@ -61,11 +67,11 @@ export const paymentListener = async (req: Request, res: Response) => {
         let document: Primavera;
         invoince.items.forEach((e) => {
           document.Linhas.push({
-            Artigo: e.description,
+            Artigo: tariff.tariff_id,
             Quantidade: e.quantity,
-            IVA: e.tax,
-            Descricao: e.description,
-            Valor: webHookBody.data.attributes.amount,
+            //IVA: e.tax,
+            //Descricao: e.description,
+            //Valor: webHookBody.data.attributes.amount,
           });
         });
         document.Entidade = customer.id;

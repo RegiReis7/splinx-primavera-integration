@@ -27,3 +27,9 @@ export default interface SplynxCustomer {
     numero_de_identificacao_fiscal: string;
   };
 }
+
+export interface SplynxCustomerStatistics{
+  id : number;
+  customer_id : number;
+  tariff_id : number;
+}

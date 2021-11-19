@@ -4,7 +4,7 @@ import crypto from "crypto";
 import http_build_query from "http-build-query";
 import InvoiceSplinx from "../Model/invoice.models";
 import log from "../../Log";
-import SplynxCustomer from "../Model/customer.models";
+import SplynxCustomer, {SplynxCustomerStatistics} from "../Model/customer.models";
 
 dotenv.config();
 
@@ -29,6 +29,7 @@ function signature() {
     .digest("hex")
     .toUpperCase();
 }
+
 function getAuthString() {
   let params = {};
 
@@ -123,6 +124,28 @@ export async function getSplynxCustomers(): Promise<
     return await response.data;
   } catch (e) {
     log.error(`(API) Falha ao requisitar a lista de clientes : ${e}`);
+    return undefined;
+  }
+}
+
+//Chamada ao método GET para obter as estatísticas do cliente dado o seu id
+
+export async function getCustomerStatistics(
+  id: number
+): Promise<SplynxCustomerStatistics | undefined> {
+  try {
+    const response = await axios.get(
+      `${process.env.API_URL}api/2.0/admin/customers/customer-statistics/${id}`,
+      {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      }
+    );
+    log.info(`(API) Retornando as estatísticas do cliente ${id}...`);
+    return await response.data;
+  } catch (e) {
+    log.error(`(API) Falha ao requisitar as estatísticas do cliente ${id} : ${e}`);
     return undefined;
   }
 }

@@ -1,10 +1,10 @@
 export default interface Primavera {
   Linhas: {
-    Artigo: string;
-    IVA: number;
-    Descricao: string;
+    Artigo: number;
+    //IVA: number;
+    //Descricao: string;
     Quantidade: number;
-    Valor: string;
+    //Total_Liquido : string;
   }[];
   Tipodoc: "FA";
   Serie: "C";
@@ -33,6 +33,6 @@ export interface PrimaveraCustomer {
   EnderecoWeb?: string;
   Distrito?: string;
   NumContribuinte?: string;
-  Pais?: "ANG";
+  Pais?: "AN";
   Moeda?: "AKZ";
 }

@@ -1,5 +1,5 @@
 import { createDocument } from "../Primavera/API/primavera.api";
-import { getInvoices } from "../Splynx/API/splynx.api";
+import { getInvoices, getCustomerStatistics } from "../Splynx/API/splynx.api";
 import { Request, Response } from "express";
 import Primavera from "../Primavera/Model/primavera.models";
 import { getCustomerById } from "../Splynx/API/splynx.api";
@@ -13,10 +13,10 @@ export const exportInvoice = async (req: Request, res: Response) => {
     .filter((e) => e.status === "Paid")
     .forEach(async (e) => {
       let document: Primavera;
-      e.items.forEach((f) => {
-        document.Linhas.push({ Artigo: f.description, Quantidade: f.quantity });
+      e.items.forEach(async (f) => {
+        document.Linhas.push({ Artigo: (await getCustomerStatistics(e.custumer_id)).tariff_id, Quantidade: f.quantity });
       });
-      document.Entidade = (await getCustomerById(e.custumer_id)).name;
+      document.Entidade = e.custumer_id;
       document.DataDoc = e.date_created;
       createDocument(document)
         .then((result) => {
@@ -24,6 +24,6 @@ export const exportInvoice = async (req: Request, res: Response) => {
             message: `A document for invoice ${e.id} was created`,
           });
         })
-        .catch((err) => res.status(400).json({ message: err.toString() }));
+        .catch((err) => res.status(400).json({ mensagem: err.toString() }));
     });
 };
