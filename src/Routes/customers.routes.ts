@@ -8,7 +8,7 @@ import {
 const routes = express.Router();
 
 routes.get("/export", exportCustomer);
-routes.get("splynx/:id", getSplynxCustomer);
+routes.get("/splynx/:id", getSplynxCustomer);
 routes.get("/primavera/:id", getPrimaveraCustomer);
 
 export default routes;
