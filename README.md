@@ -15,7 +15,7 @@ Aplicação que garante a comunicação entre as plataformas **Splynx** e **Prim
 
 ## VARIÁVEIS AMBIENTE
 
-Para executar a aplicação em ordem, é necessário que adicione as seguintes variáveis ambiente em um ficheiro .env
+Para executar a aplicação em ordem, é necessário que adicione as seguintes variáveis ambiente em um ficheiro .env na raiz do projeto
 
 #### SPLYNX
 `API_KEY = Key da API`
