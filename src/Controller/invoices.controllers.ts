@@ -2,7 +2,6 @@ import { createDocument } from "../Primavera/API/primavera.api";
 import { getInvoices, getCustomerStatistics } from "../Splynx/API/splynx.api";
 import { Request, Response } from "express";
 import Primavera from "../Primavera/Model/primavera.models";
-import { getCustomerById } from "../Splynx/API/splynx.api";
 import log from "../Log";
 
 export const exportInvoice = async (req: Request, res: Response) => {

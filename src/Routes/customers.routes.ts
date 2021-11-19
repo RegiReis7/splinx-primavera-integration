@@ -1,12 +1,14 @@
 import express from "express";
 import {
   exportCustomer,
-  getSplynxCustomerRoute,
+  getSplynxCustomer,
+  getPrimaveraCustomer,
 } from "../Controller/customers.controller";
 
 const routes = express.Router();
 
 routes.get("/export", exportCustomer);
-routes.get("/:id", getSplynxCustomerRoute);
+routes.get("splynx/:id", getSplynxCustomer);
+routes.get("/primavera/:id", getPrimaveraCustomer);
 
 export default routes;

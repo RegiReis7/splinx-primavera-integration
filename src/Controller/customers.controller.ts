@@ -1,7 +1,7 @@
 import { PrimaveraCustomer } from "../Primavera/Model/primavera.models";
 import { Request, Response } from "express";
 import { getCustomerById, getSplynxCustomers } from "../Splynx/API/splynx.api";
-import { createCustomer } from "../Primavera/API/primavera.api";
+import { createCustomer, customerExists } from "../Primavera/API/primavera.api";
 import log from "../Log";
 
 export const exportCustomer = async (req: Request, res: Response) => {
@@ -38,13 +38,13 @@ export const exportCustomer = async (req: Request, res: Response) => {
   }
 };
 
-export const getSplynxCustomerRoute = async (req: Request, res: Response) => {
-  log.info("Recebendo o cliente...");
+export const getSplynxCustomer = async (req: Request, res: Response) => {
+  log.info("Recebendo o cliente Splynx...");
   const customer = await getCustomerById(+req.params.id);
 
   if (customer) {
     log.info(
-      `Id do cliente: ${customer.id}\nNome do cliente: ${customer.name}`
+      `Id do cliente: ${customer.id} Nome do cliente: ${customer.name}`
     );
     res.status(200).json({ mensagem: "sucesso!" });
   } else {
@@ -52,3 +52,18 @@ export const getSplynxCustomerRoute = async (req: Request, res: Response) => {
     res.status(400).json({ mensagem: "Erro ao requisitar o cliente" });
   }
 };
+
+export const getPrimaveraCustomer = async (req : Request, res: Response) => {
+  log.info("Recebendo o cliente Primavera...");
+  const customer = await customerExists(+req.params.id);
+
+  if (customer) {
+    log.info(
+      `Id do cliente: ${customer.Cliente} Nome do cliente: ${customer.Nome}`
+    );
+    res.status(200).json({ mensagem: "sucesso!" });
+  } else {
+    log.error(`Erro ao requisitar o cliente!`);
+    res.status(400).json({ mensagem: "Erro ao requisitar o cliente" });
+  }
+}

@@ -34,6 +34,8 @@ Para executar a aplicação em ordem, é necessário que adicione as seguintes v
 
 `PASSWORD_PRIMAVERA = Palavra-passe do usuário`
 
+`COMPANY_PRIMAVERA = Nome da empresa`
+
 ## EXECUÇÃO
 
 Primeiramente, instale as dependências da aplicação usando o comando abaixo:
