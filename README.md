@@ -4,9 +4,9 @@
 Aplicação que garante a comunicação entre as plataformas **Splynx** e **Primavera** para fins de faturação quando um evento de pagamento é acionado
 
 
-## AMBIENTE
+## TECNOLOGIAS
 
-**Back-End:** Node, Express
+- [Express JS](https://expressjs.com/) - Framework para aplicações web para Node JS
 
 
 ## REQUISITOS
