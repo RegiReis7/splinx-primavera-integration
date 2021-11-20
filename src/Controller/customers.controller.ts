@@ -43,17 +43,15 @@ export const getSplynxCustomer = async (req: Request, res: Response) => {
   const customer = await getCustomerById(+req.params.id);
 
   if (customer) {
-    log.info(
-      `Id do cliente: ${customer.id} Nome do cliente: ${customer.name}`
-    );
-    res.status(200).json({ mensagem: "sucesso!" });
+    log.info(`Id do cliente: ${customer.id} Nome do cliente: ${customer.name}`);
+    res.status(200).json({ mensagem: "sucesso!", clienteRetornado: customer });
   } else {
     log.error(`Erro ao requisitar o cliente!`);
     res.status(400).json({ mensagem: "Erro ao requisitar o cliente" });
   }
 };
 
-export const getPrimaveraCustomer = async (req : Request, res: Response) => {
+export const getPrimaveraCustomer = async (req: Request, res: Response) => {
   log.info("Recebendo o cliente Primavera...");
   const customer = await customerExists(+req.params.id);
 
@@ -66,4 +64,4 @@ export const getPrimaveraCustomer = async (req : Request, res: Response) => {
     log.error(`Erro ao requisitar o cliente!`);
     res.status(400).json({ mensagem: "Erro ao requisitar o cliente" });
   }
-}
+};
