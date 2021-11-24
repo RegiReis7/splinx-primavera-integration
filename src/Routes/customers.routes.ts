@@ -3,7 +3,7 @@ import {
   exportCustomer,
   getSplynxCustomer,
   getPrimaveraCustomer,
-} from "../Controller/customers.controller";
+} from "../Controller/customers.controllers";
 
 const routes = express.Router();
 
