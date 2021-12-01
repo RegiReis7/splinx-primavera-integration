@@ -29,20 +29,6 @@
           }
         }
       },
-      "/invoices/export": {
-        "get": {
-          "summary": "Export Invoices and creates primavera documents",
-          "tags": ["Invoices"],
-          "responses": {
-            "200": {
-              "description": "Exportation went well"
-            },
-            "400": {
-              "description": "Something went wrong on the exportation process"
-            }
-          }
-        }
-      },
       "/api/health": {
         "get": {
           "summary": "Checks if the api is working fine",
