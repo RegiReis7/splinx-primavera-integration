@@ -16,12 +16,13 @@ import {
 import SplynxWebhook from "../Splynx/Model/webhook.models";
 
 export const paymentListener = async (req: Request, res: Response) => {
-  if (req.body) {
-    const webHookBody = req.body as SplynxWebhook;
+  const webHookBody = req.body as SplynxWebhook;
+
+  if (webHookBody) {
     log.info(`Informação do webhook recebida: ${JSON.stringify(webHookBody)}`);
     res.status(200).json({ mensagem: "Informação do webhook recebida" });
 
-    /*try {
+    try {
       const invoince = await getInvoiceById(
         webHookBody.data.attributes.invoice_id
       );
@@ -82,7 +83,7 @@ export const paymentListener = async (req: Request, res: Response) => {
       }
     } catch (e) {
       log.err(`Erro ao criar o documento: ${e}`);
-    }*/
+    }
   } else {
     log.error(`Informação do webhook não recebida...`);
     res
